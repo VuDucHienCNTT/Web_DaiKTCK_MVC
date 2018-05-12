@@ -1,0 +1,201 @@
+﻿@model PagedList.PagedList<Web_AMO_MVC.Models.LICHLAMVIEC>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Lịch công tác";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.1.0.js"></script>
+<div class="well-sm" style="border:1px solid #d5d5d5; margin-bottom:1%;border-radius:unset;">
+    <a href="/">Trang chủ</a> >> <a href="/lich-cong-tac">Lịch công tác</a> >>
+</div>
+
+<div>
+    @if (Session["IdTK"] == null)
+    {
+        <div class="btn-group pull-right">
+            <a href="/Admin/dang-nhap?returnUrl=@Request.Url.AbsoluteUri" class="btn btn-primary btn-sm pull-right">Đăng nhập</a>
+        </div>
+        <br />
+            <br />
+    }
+    else
+    {
+        <div class="btn-group pull-right">
+            <a class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">Mới <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a style="cursor:pointer" data-target="#myModalThemLich" data-toggle="modal">Nội dung</a></li>
+                <li><a style="cursor:pointer" data-target="#myModalThemLinkLich" data-toggle="modal">Link Nội dung</a></li>
+            </ul>
+        </div>
+        <br />
+            <br />
+    }
+    @if (Model != null)
+    {
+        foreach (var llv in Model)
+        {
+            <a style="font-weight:bold; color:#0a68db" href="/chi-tiet/lich-cong-tac/@llv.IdLLV/@Web_AMO_MVC.Models.ChuanHoaSEO.ConvertTitle(llv.TieuDe)"> @llv.TieuDe</a><br />
+            <span style="color:#999;" class="glyphicon glyphicon-user"></span><span style="color:#999;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"> @llv.TAIKHOAN.HoTen</span> <span>-</span>
+                <span style="color:#999;" class="glyphicon glyphicon-time"></span> <span style="color:#999;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">@llv.NgayDang.Value.ToString("dd/MM/yyyy hh:mm:ss tt")</span> <span>-</span>
+                <span style="color:#999;" class="glyphicon glyphicon-eye-open"></span><span style="color:#999;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"> @llv.LuotXem lượt xem</span>
+                <br />
+                <hr />
+        }
+    }
+</div>
+
+<div class="modal fade" id="myModalThemLich" role="dialog">
+    <div class="modal-dialog modal-lg">
+        @using (Html.BeginForm("Them", "LichCongTac", FormMethod.Post))
+            {
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Thêm mới lịch công tác</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>Tiêu đề lịch công tác</label> <label id="errtieude"></label>
+                            <input type="text" id="txttieude" class="form-control" name="TieuDe" placeholder="Nhập tiêu đề lịch" />
+                        </div>
+                        <div class="form-group">
+                            <label>Nội dung lịch công tác</label> <label id="errnoidung"></label>
+                            <textarea id="editor" name="LinkNoiDung" placeholder="Nhập nội dung lịch"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Nhắc lịch công tác </label>
+                            <textarea class="form-control" style="resize:vertical" name="NhacLich" placeholder="Nhập nhắc lịch" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày đăng</label> <label style="font-weight:normal"> (Nếu không chọn thì mặc địch lấy ngày giờ hiện tại)</label>
+                            <input type="datetime-local" id="txtngaydang" class="form-control" name="NgayDang" />
+                        </div>
+                        <di hidden class="form-group">
+                            <label>Người đăng</label>
+                            <input type="text" class="form-control" name="IdTaiKhoan" value="@Session["IdTK"]" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="btnluu1" class="btn btn-success">Lưu</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy bỏ</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="modal fade" id="myModalThemLinkLich" role="dialog">
+    <div class="modal-dialog">
+        @using (Html.BeginForm("Them", "LichCongTac", FormMethod.Post))
+            {
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Thêm mới lịch công tác</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>Tiêu đề lịch công tác</label> <label id="errtieude2"></label>
+                            <input type="text" id="txttieude2" class="form-control" name="TieuDe" placeholder="Nhập tiêu đề lịch" />
+                        </div>
+                        <div class="form-group">
+                            <label>Link nội dung lịch công tác</label> <label id="errlink"></label>
+                            <input type="url" id="txtlink" class="form-control" name="LinkNoiDung" placeholder="Nhập nội dung lịch" />
+                        </div>
+                        <div class="form-group">
+                            <label>Nhắc lịch công tác</label>
+                            <textarea class="form-control" style="resize:vertical" id="txtnhaclich" name="NhacLich" placeholder="Nhập nhắc lịch" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày đăng</label> <label style="font-weight:normal"> (Nếu không chọn thì mặc địch lấy ngày giờ hiện tại)</label>
+                            <input type="datetime-local" id="txtngaydang" class="form-control" name="NgayDang" />
+                        </div>
+                        <div hidden class="form-group">
+                            <label>Người đăng</label>
+                            <input type="text" class="form-control" name="IdTaiKhoan" value="@Session["IdTK"]" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="btnluu2" class="btn btn-success">Lưu</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy bỏ</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+Có tất cả: <span style="font-weight:bold"> @ViewBag.Count</span> lịch công tác <br />
+
+Trang: <span style="font-weight:bold"> @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount</span>
+@if (Model.PageCount <= 1)
+{
+}
+else
+{
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+}
+
+<script type="text/javascript" language="javascript">
+    $('#btnluu1').click(function () {
+        var error = 0;
+        if ($('#txttieude').val() == "") {
+            $('#errtieude').text("(*)");
+            $('#errtieude').css("color", "#FA5858");
+            error++;
+        }
+        else {
+            $('#errtieude').text("");
+            $('#errtieude').css("color", "#666");
+        }
+
+        var text = CKEDITOR.instances.editor.getData();
+        if (text == "") {
+            $('#errnoidung').text("(*)");
+            $('#errnoidung').css("color", "#FA5858");
+        }
+        else {
+            $('#errnoidung').text("");
+            $('#errnoidung').css("color", "#666");
+        }
+        if (error != 0) {
+            return false;
+        }
+        else
+            return true;
+    });
+</script>
+
+<script type="text/javascript" language="javascript">
+    $('#btnluu2').click(function () {
+        var error = 0;
+        if ($('#txttieude2').val() == "") {
+            $('#errtieude2').text("(*)");
+            $('#errtieude2').css("color", "#FA5858");
+            error++;
+        }
+        else {
+            $('#errtieude2').text("");
+            $('#errtieude2').css("color", "#666");
+        }
+
+        if ($('#txtlink').val() == "") {
+            $('#errlink').text("(*)");
+            $('#errlink').css("color", "#FA5858");
+            error++;
+        }
+        else {
+            $('#errlink').text("");
+            $('#errlink').css("color", "#666");
+        }
+        if (error != 0) {
+            return false;
+        }
+        else
+            return true;
+    });
+</script>

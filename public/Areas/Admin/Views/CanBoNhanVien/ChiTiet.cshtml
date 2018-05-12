@@ -1,0 +1,55 @@
+﻿@model Web_AMO_MVC.Models.CANBO
+@{
+    ViewBag.Title = Model.HoTen;
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    label {
+        font-weight: normal;
+        font-family: 'Segoe UI';
+        font-size: 15px;
+    }
+</style>
+<div class="content">
+    <label style="font-size:27px; font-weight:bold; color:#0094ff">Chi tiết cán bộ nhân viên: Mã số @Model.IdCB</label><br />
+    <label style="font-size:22px">Họ tên cán bộ nhân viên:</label>
+    <label style="font-size:22px">@Model.HoTen</label><br />
+
+    <label>Chức vụ:</label>
+    <label>@Model.ChucVu</label><br />
+
+    <label>Bằng cấp:</label>
+    <label>@Model.BangCap</label><br />
+
+    <label>Phòng làm việc:</label>
+    <label>@Model.PHONGBAN.TenPhong</label><br />
+
+    <label>Email:</label>
+    <label>@Model.Email</label><br />
+
+    <label>Quê quán:</label>
+    <label>@Model.QueQuan</label><br />
+
+    <label>Ngày sinh:</label>
+    <label>@Model.NgaySinh.Value.ToString("dd/MM/yyyy")</label><br />
+
+    <label>Số điện thoại:</label>
+    <label>@Model.SoDT</label><br />
+
+    <label>Ngày cập nhật cuối:</label>
+    <label>@Model.NgayCapNhat.Value.ToString("dd/MM/yyyy hh:mm tt")</label><br />
+
+    <label>Hình ảnh:</label>
+    <img src="@Model.AnhMoTa" style="max-width:70px; margin:10px" /><br />
+
+    <label>Thông tin chi tiết:</label>
+    <label>@Model.ChiTiet</label><br />
+
+    <label>Người đăng:</label>
+    <label>@Model.TAIKHOAN.HoTen</label><br />
+
+    <p style="font-size:18px; color:#0026ff; text-decoration:underline">
+        @Html.ActionLink("Quay lại", "Index")
+    </p>
+</div>

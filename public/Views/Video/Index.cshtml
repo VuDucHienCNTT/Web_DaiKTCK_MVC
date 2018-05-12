@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Web_AMO_MVC.Models.ALBUM>
+@{
+    ViewBag.Title = "Album Video";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="well-sm" style="border:1px solid #d5d5d5; margin-bottom:1%;border-radius:unset">
+    <a href="/">Trang chủ</a> >> <a href="/video">Album Video</a>
+</div>
+
+<div class="row">
+    @if (Model != null)
+    {
+        foreach (var album in Model)
+        {
+            if (album.VIDEOs.Count > 0)
+            {
+                <div class="col-xs-6 col-sm-4">
+                    <a href="/danh-sach-video/@album.IdAlbum/@Web_AMO_MVC.Models.ChuanHoaSEO.ConvertTitle(album.TenAlbum)">
+                        <img class="img-responsive" style="height:140px;width:100%;border:1px solid #065ca5" src="@album.AnhDaiDien">
+                    </a>
+                    <div style="margin-top:6px;">
+                        <a href="/danh-sach-video/@album.IdAlbum/@Web_AMO_MVC.Models.ChuanHoaSEO.ConvertTitle(album.TenAlbum)">
+                            <label style="font-size:24px;color:#096be2">@album.TenAlbum</label>
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>
+
+

@@ -1,0 +1,89 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Đăng nhập tài khoản</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="~/Areas/Admin/Content/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Areas/Admin/Content/dist/css/AdminLTE.min.css">
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-box-body">
+            <p class="login-logo" style="font-size:20px; font-weight:bold">Đăng nhập tài khoản</p>
+            @if (@ViewBag.tbDangNhap != null)
+            {
+                <label style="color:#FA5858;">@ViewBag.tbDangNhap</label>
+            }
+            @using (Html.BeginForm("DangNhap", "TaiKhoan", FormMethod.Post))
+            {
+                <div class="form-group has-feedback">
+                    <label>Email</label> <label id="erroremail"></label>
+                    <input type="email" name="Email" id="txtemail" class="form-control" placeholder="Nhập email của bạn">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <label>Mật khẩu</label> <label id="errorpassword"></label>
+                    <input type="password" id="txtpassword" name="Password" class="form-control" placeholder="Nhập mật khẩu của bạn">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row" style="margin-bottom:2%">
+                    <div class="col-xs-12">
+                        <button type="submit" id="btnsubmit" class="btn btn-md btn-primary btn-block">Đăng nhập</button>
+                    </div>
+                </div>
+                <label> Bạn muốn quay về?</label><a href="/"> Trang chủ</a><br />
+                <label> Bạn chưa có tài khoản? </label><a href="~/Admin/dang-ky"> Đăng ký</a>
+            }
+        </div>
+    </div>
+    <!-- jQuery 2.2.3 -->
+    <script src="~/Areas/Admin/Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="~/Areas/Admin/Content/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $('#btnsubmit').click(function () {
+            var error = 0;
+            if ($('#txtemail').val() == "") {
+                $('#erroremail').text("(*)");
+                $('#erroremail').css("color", "#FA5858");
+                error++;
+            }
+            else {
+                $('#erroremail').text("");
+                $('#erroremail').css("color", "#666");
+            }
+
+            if ($('#txtpassword').val() == "") {
+                $('#errorpassword').text("(*)");
+                $('#errorpassword').css("color", "#FA5858");
+                error++;
+            }
+            else {
+                $('#errorpassword').text("");
+                $('#errorpassword').css("color", "#666");
+            }
+            if (error != 0) {
+                return false;
+            }
+            else
+                return true;
+        });
+    </script>
+</body>
+</html>
+<noembed>

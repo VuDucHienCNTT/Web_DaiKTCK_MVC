@@ -1,0 +1,32 @@
+﻿@model List<Web_AMO_MVC.Models.LICHLAMVIEC>
+@{
+    ViewBag.Title = "Kết quả tìm kiếm lịch công tác";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="well-sm" style="border:1px solid #d5d5d5; margin-bottom:1%;border-radius:unset;">
+    <a href="/">Trang chủ</a> >> Tìm kiếm >> Lịch công tác >>
+</div>
+
+Kết quả tìm kiếm cho từ khóa : <span style="font-weight:bold">@ViewBag.TuKhoa</span><br />
+<br />
+
+@if (Model != null)
+{
+    if (Model.Count <= 0)
+    {
+        <span style="font-weight:bold">Không tìm được kết quả nào</span>
+    }
+    else
+    {
+        foreach (var kqlct in Model)
+        {
+            <a style="font-weight:bold;color:#0a68db" href="/chi-tiet/lich-cong-tac/@kqlct.IdLLV/@Web_AMO_MVC.Models.ChuanHoaSEO.ConvertTitle(kqlct.TieuDe)"> @kqlct.TieuDe</a><br />
+            <span style="color:#999;" class="glyphicon glyphicon-user"></span><span style="color:#999;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"> @kqlct.TAIKHOAN.HoTen</span> <span>-</span>
+            <span style="color:#999;" class="glyphicon glyphicon-time"></span> <span style="color:#999;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">@kqlct.NgayDang.Value.ToString("dd/MM/yyyy hh:mm:ss tt")</span> <span>-</span>
+            <span style="color:#999;" class="glyphicon glyphicon-eye-open"></span><span style="color:#999;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"> @kqlct.LuotXem lượt xem</span>
+            <br />
+            <hr />
+        }
+    }
+}

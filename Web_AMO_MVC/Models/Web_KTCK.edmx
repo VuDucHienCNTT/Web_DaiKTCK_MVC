@@ -1,0 +1,981 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Web_KTCKModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ALBUMs">
+          <Key>
+            <PropertyRef Name="IdAlbum" />
+          </Key>
+          <Property Name="IdAlbum" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenAlbum" Type="nvarchar" MaxLength="250" />
+          <Property Name="AnhDaiDien" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="BAIVIETs">
+          <Key>
+            <PropertyRef Name="IdBV" />
+          </Key>
+          <Property Name="IdBV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TieuDe" Type="nvarchar" MaxLength="250" />
+          <Property Name="TomTat" Type="nvarchar" MaxLength="500" />
+          <Property Name="NoiDung" Type="nvarchar(max)" />
+          <Property Name="NgayDang" Type="datetime" />
+          <Property Name="TacGia" Type="nvarchar" MaxLength="100" />
+          <Property Name="AnhBV" Type="nvarchar" MaxLength="100" />
+          <Property Name="NgayCapNhat" Type="datetime" />
+          <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
+          <Property Name="Slide" Type="nvarchar" MaxLength="50" />
+          <Property Name="LuotXem" Type="int" />
+          <Property Name="IdTaiKhoan" Type="int" Nullable="false" />
+          <Property Name="IdTheLoai" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BINHLUANs">
+          <Key>
+            <PropertyRef Name="IdBL" />
+          </Key>
+          <Property Name="IdBL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NoiDung" Type="nvarchar" MaxLength="1000" />
+          <Property Name="NgayBinhLuan" Type="datetime" />
+          <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
+          <Property Name="UrlBaiViet" Type="nvarchar" MaxLength="500" />
+          <Property Name="IdBaiViet" Type="int" Nullable="false" />
+          <Property Name="IdTaiKhoan" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CANBOes">
+          <Key>
+            <PropertyRef Name="IdCB" />
+          </Key>
+          <Property Name="IdCB" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="100" />
+          <Property Name="ChucVu" Type="nvarchar" MaxLength="100" />
+          <Property Name="BangCap" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="QueQuan" Type="nvarchar" MaxLength="100" />
+          <Property Name="NgaySinh" Type="datetime" />
+          <Property Name="SoDT" Type="nvarchar" MaxLength="25" />
+          <Property Name="AnhMoTa" Type="nvarchar" MaxLength="100" />
+          <Property Name="ChiTiet" Type="nvarchar(max)" />
+          <Property Name="NgayCapNhat" Type="datetime" />
+          <Property Name="IdTaiKhoan" Type="int" />
+          <Property Name="IdPhongBan" Type="int" />
+        </EntityType>
+        <EntityType Name="HINHANHs">
+          <Key>
+            <PropertyRef Name="IdHinhAnh" />
+          </Key>
+          <Property Name="IdHinhAnh" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenHinhAnh" Type="nvarchar" MaxLength="100" />
+          <Property Name="NgayDang" Type="datetime" />
+          <Property Name="HinhAnh" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdAlbum" Type="int" />
+          <Property Name="IdTaiKhoan" Type="int" />
+        </EntityType>
+        <EntityType Name="LICHLAMVIECs">
+          <Key>
+            <PropertyRef Name="IdLLV" />
+          </Key>
+          <Property Name="IdLLV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TieuDe" Type="nvarchar" MaxLength="250" />
+          <Property Name="LinkNoiDung" Type="nvarchar(max)" />
+          <Property Name="NgayDang" Type="datetime" />
+          <Property Name="NhacLich" Type="nvarchar" MaxLength="500" />
+          <Property Name="LuotXem" Type="int" />
+          <Property Name="IdTaiKhoan" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PHONGBANs">
+          <Key>
+            <PropertyRef Name="IdPB" />
+          </Key>
+          <Property Name="IdPB" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenPhong" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TAIKHOANs">
+          <Key>
+            <PropertyRef Name="IdTK" />
+          </Key>
+          <Property Name="IdTK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="RetypePassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="AnhDaiDien" Type="nvarchar" MaxLength="200" />
+          <Property Name="Quyen" Type="nvarchar" MaxLength="25" />
+          <Property Name="TrangThai" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="TAILIEUx">
+          <Key>
+            <PropertyRef Name="IdTL" />
+          </Key>
+          <Property Name="IdTL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TieuDe" Type="nvarchar" MaxLength="250" />
+          <Property Name="LinkNoiDung" Type="nvarchar(max)" />
+          <Property Name="NgayDang" Type="datetime" />
+          <Property Name="LuotXem" Type="int" />
+          <Property Name="IdTaiKhoan" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="THELOAIBAIVIETs">
+          <Key>
+            <PropertyRef Name="IdTheLoai" />
+          </Key>
+          <Property Name="IdTheLoai" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenTheLoai" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="THONGBAOs">
+          <Key>
+            <PropertyRef Name="IdTB" />
+          </Key>
+          <Property Name="IdTB" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TieuDe" Type="nvarchar" MaxLength="250" />
+          <Property Name="NoiDung" Type="nvarchar(max)" />
+          <Property Name="NgayDang" Type="datetime" />
+          <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdTaiKhoan" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VIDEOs">
+          <Key>
+            <PropertyRef Name="IdVideo" />
+          </Key>
+          <Property Name="IdVideo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenVideo" Type="nvarchar" MaxLength="100" />
+          <Property Name="NgayDang" Type="datetime" />
+          <Property Name="LinkVideo" Type="nvarchar" MaxLength="250" />
+          <Property Name="IdAlbum" Type="int" />
+          <Property Name="IdTaiKhoan" Type="int" />
+        </EntityType>
+        <Association Name="FK_BAIVIET_TAIKHOAN1">
+          <End Role="TAIKHOANs" Type="Self.TAIKHOANs" Multiplicity="1" />
+          <End Role="BAIVIETs" Type="Self.BAIVIETs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANs">
+              <PropertyRef Name="IdTK" />
+            </Principal>
+            <Dependent Role="BAIVIETs">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BAIVIET_THELOAIBAIVIET">
+          <End Role="THELOAIBAIVIETs" Type="Self.THELOAIBAIVIETs" Multiplicity="1" />
+          <End Role="BAIVIETs" Type="Self.BAIVIETs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THELOAIBAIVIETs">
+              <PropertyRef Name="IdTheLoai" />
+            </Principal>
+            <Dependent Role="BAIVIETs">
+              <PropertyRef Name="IdTheLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BINHLUAN_BAIVIET">
+          <End Role="BAIVIETs" Type="Self.BAIVIETs" Multiplicity="1" />
+          <End Role="BINHLUANs" Type="Self.BINHLUANs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAIVIETs">
+              <PropertyRef Name="IdBV" />
+            </Principal>
+            <Dependent Role="BINHLUANs">
+              <PropertyRef Name="IdBaiViet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BINHLUAN_TAIKHOAN">
+          <End Role="TAIKHOANs" Type="Self.TAIKHOANs" Multiplicity="1" />
+          <End Role="BINHLUANs" Type="Self.BINHLUANs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANs">
+              <PropertyRef Name="IdTK" />
+            </Principal>
+            <Dependent Role="BINHLUANs">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CANBO_PHONGBAN">
+          <End Role="PHONGBANs" Type="Self.PHONGBANs" Multiplicity="0..1" />
+          <End Role="CANBOes" Type="Self.CANBOes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHONGBANs">
+              <PropertyRef Name="IdPB" />
+            </Principal>
+            <Dependent Role="CANBOes">
+              <PropertyRef Name="IdPhongBan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CANBO_TAIKHOAN">
+          <End Role="TAIKHOANs" Type="Self.TAIKHOANs" Multiplicity="0..1" />
+          <End Role="CANBOes" Type="Self.CANBOes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANs">
+              <PropertyRef Name="IdTK" />
+            </Principal>
+            <Dependent Role="CANBOes">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HINHANH_ALBUM">
+          <End Role="ALBUMs" Type="Self.ALBUMs" Multiplicity="0..1" />
+          <End Role="HINHANHs" Type="Self.HINHANHs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALBUMs">
+              <PropertyRef Name="IdAlbum" />
+            </Principal>
+            <Dependent Role="HINHANHs">
+              <PropertyRef Name="IdAlbum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HINHANH_TAIKHOAN">
+          <End Role="TAIKHOANs" Type="Self.TAIKHOANs" Multiplicity="0..1" />
+          <End Role="HINHANHs" Type="Self.HINHANHs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANs">
+              <PropertyRef Name="IdTK" />
+            </Principal>
+            <Dependent Role="HINHANHs">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHLAMVIEC_TAIKHOAN">
+          <End Role="TAIKHOANs" Type="Self.TAIKHOANs" Multiplicity="1" />
+          <End Role="LICHLAMVIECs" Type="Self.LICHLAMVIECs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANs">
+              <PropertyRef Name="IdTK" />
+            </Principal>
+            <Dependent Role="LICHLAMVIECs">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAILIEU_TAIKHOAN">
+          <End Role="TAIKHOANs" Type="Self.TAIKHOANs" Multiplicity="1" />
+          <End Role="TAILIEUx" Type="Self.TAILIEUx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANs">
+              <PropertyRef Name="IdTK" />
+            </Principal>
+            <Dependent Role="TAILIEUx">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THONGBAO_TAIKHOAN1">
+          <End Role="TAIKHOANs" Type="Self.TAIKHOANs" Multiplicity="1" />
+          <End Role="THONGBAOs" Type="Self.THONGBAOs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANs">
+              <PropertyRef Name="IdTK" />
+            </Principal>
+            <Dependent Role="THONGBAOs">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIDEO_ALBUM">
+          <End Role="ALBUMs" Type="Self.ALBUMs" Multiplicity="0..1" />
+          <End Role="VIDEOs" Type="Self.VIDEOs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALBUMs">
+              <PropertyRef Name="IdAlbum" />
+            </Principal>
+            <Dependent Role="VIDEOs">
+              <PropertyRef Name="IdAlbum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIDEO_TAIKHOAN">
+          <End Role="TAIKHOANs" Type="Self.TAIKHOANs" Multiplicity="0..1" />
+          <End Role="VIDEOs" Type="Self.VIDEOs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANs">
+              <PropertyRef Name="IdTK" />
+            </Principal>
+            <Dependent Role="VIDEOs">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="RP_BaiViet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDBaiViet" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Web_KTCKModelStoreContainer">
+          <EntitySet Name="ALBUMs" EntityType="Self.ALBUMs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BAIVIETs" EntityType="Self.BAIVIETs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BINHLUANs" EntityType="Self.BINHLUANs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CANBOes" EntityType="Self.CANBOes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HINHANHs" EntityType="Self.HINHANHs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LICHLAMVIECs" EntityType="Self.LICHLAMVIECs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHONGBANs" EntityType="Self.PHONGBANs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAIKHOANs" EntityType="Self.TAIKHOANs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAILIEUx" EntityType="Self.TAILIEUx" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THELOAIBAIVIETs" EntityType="Self.THELOAIBAIVIETs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THONGBAOs" EntityType="Self.THONGBAOs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VIDEOs" EntityType="Self.VIDEOs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BAIVIET_TAIKHOAN1" Association="Self.FK_BAIVIET_TAIKHOAN1">
+            <End Role="TAIKHOANs" EntitySet="TAIKHOANs" />
+            <End Role="BAIVIETs" EntitySet="BAIVIETs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BAIVIET_THELOAIBAIVIET" Association="Self.FK_BAIVIET_THELOAIBAIVIET">
+            <End Role="THELOAIBAIVIETs" EntitySet="THELOAIBAIVIETs" />
+            <End Role="BAIVIETs" EntitySet="BAIVIETs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BINHLUAN_BAIVIET" Association="Self.FK_BINHLUAN_BAIVIET">
+            <End Role="BAIVIETs" EntitySet="BAIVIETs" />
+            <End Role="BINHLUANs" EntitySet="BINHLUANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BINHLUAN_TAIKHOAN" Association="Self.FK_BINHLUAN_TAIKHOAN">
+            <End Role="TAIKHOANs" EntitySet="TAIKHOANs" />
+            <End Role="BINHLUANs" EntitySet="BINHLUANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CANBO_PHONGBAN" Association="Self.FK_CANBO_PHONGBAN">
+            <End Role="PHONGBANs" EntitySet="PHONGBANs" />
+            <End Role="CANBOes" EntitySet="CANBOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CANBO_TAIKHOAN" Association="Self.FK_CANBO_TAIKHOAN">
+            <End Role="TAIKHOANs" EntitySet="TAIKHOANs" />
+            <End Role="CANBOes" EntitySet="CANBOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HINHANH_ALBUM" Association="Self.FK_HINHANH_ALBUM">
+            <End Role="ALBUMs" EntitySet="ALBUMs" />
+            <End Role="HINHANHs" EntitySet="HINHANHs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HINHANH_TAIKHOAN" Association="Self.FK_HINHANH_TAIKHOAN">
+            <End Role="TAIKHOANs" EntitySet="TAIKHOANs" />
+            <End Role="HINHANHs" EntitySet="HINHANHs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHLAMVIEC_TAIKHOAN" Association="Self.FK_LICHLAMVIEC_TAIKHOAN">
+            <End Role="TAIKHOANs" EntitySet="TAIKHOANs" />
+            <End Role="LICHLAMVIECs" EntitySet="LICHLAMVIECs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAILIEU_TAIKHOAN" Association="Self.FK_TAILIEU_TAIKHOAN">
+            <End Role="TAIKHOANs" EntitySet="TAIKHOANs" />
+            <End Role="TAILIEUx" EntitySet="TAILIEUx" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THONGBAO_TAIKHOAN1" Association="Self.FK_THONGBAO_TAIKHOAN1">
+            <End Role="TAIKHOANs" EntitySet="TAIKHOANs" />
+            <End Role="THONGBAOs" EntitySet="THONGBAOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIDEO_ALBUM" Association="Self.FK_VIDEO_ALBUM">
+            <End Role="ALBUMs" EntitySet="ALBUMs" />
+            <End Role="VIDEOs" EntitySet="VIDEOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIDEO_TAIKHOAN" Association="Self.FK_VIDEO_TAIKHOAN">
+            <End Role="TAIKHOANs" EntitySet="TAIKHOANs" />
+            <End Role="VIDEOs" EntitySet="VIDEOs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Web_KTCKModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ALBUM">
+          <Key>
+            <PropertyRef Name="IdAlbum" />
+          </Key>
+          <Property Name="IdAlbum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenAlbum" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AnhDaiDien" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HINHANHs" Relationship="Self.FK_HINHANH_ALBUM" FromRole="ALBUMs" ToRole="HINHANHs" />
+          <NavigationProperty Name="VIDEOs" Relationship="Self.FK_VIDEO_ALBUM" FromRole="ALBUMs" ToRole="VIDEOs" />
+        </EntityType>
+        <EntityType Name="BAIVIET">
+          <Key>
+            <PropertyRef Name="IdBV" />
+          </Key>
+          <Property Name="IdBV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TieuDe" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TomTat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayDang" Type="DateTime" Precision="3" />
+          <Property Name="TacGia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AnhBV" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
+          <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Slide" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LuotXem" Type="Int32" />
+          <Property Name="IdTaiKhoan" Type="Int32" Nullable="false" />
+          <Property Name="IdTheLoai" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK_BAIVIET_TAIKHOAN1" FromRole="BAIVIETs" ToRole="TAIKHOANs" />
+          <NavigationProperty Name="THELOAIBAIVIET" Relationship="Self.FK_BAIVIET_THELOAIBAIVIET" FromRole="BAIVIETs" ToRole="THELOAIBAIVIETs" />
+          <NavigationProperty Name="BINHLUANs" Relationship="Self.FK_BINHLUAN_BAIVIET" FromRole="BAIVIETs" ToRole="BINHLUANs" />
+        </EntityType>
+        <EntityType Name="BINHLUAN">
+          <Key>
+            <PropertyRef Name="IdBL" />
+          </Key>
+          <Property Name="IdBL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoiDung" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="NgayBinhLuan" Type="DateTime" Precision="3" />
+          <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UrlBaiViet" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IdBaiViet" Type="Int32" Nullable="false" />
+          <Property Name="IdTaiKhoan" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BAIVIET" Relationship="Self.FK_BINHLUAN_BAIVIET" FromRole="BINHLUANs" ToRole="BAIVIETs" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK_BINHLUAN_TAIKHOAN" FromRole="BINHLUANs" ToRole="TAIKHOANs" />
+        </EntityType>
+        <EntityType Name="CANBO">
+          <Key>
+            <PropertyRef Name="IdCB" />
+          </Key>
+          <Property Name="IdCB" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ChucVu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BangCap" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="QueQuan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="3" />
+          <Property Name="SoDT" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="AnhMoTa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ChiTiet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
+          <Property Name="IdTaiKhoan" Type="Int32" />
+          <Property Name="IdPhongBan" Type="Int32" />
+          <NavigationProperty Name="PHONGBAN" Relationship="Self.FK_CANBO_PHONGBAN" FromRole="CANBOes" ToRole="PHONGBANs" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK_CANBO_TAIKHOAN" FromRole="CANBOes" ToRole="TAIKHOANs" />
+        </EntityType>
+        <EntityType Name="HINHANH">
+          <Key>
+            <PropertyRef Name="IdHinhAnh" />
+          </Key>
+          <Property Name="IdHinhAnh" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenHinhAnh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NgayDang" Type="DateTime" Precision="3" />
+          <Property Name="HinhAnh1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdAlbum" Type="Int32" />
+          <Property Name="IdTaiKhoan" Type="Int32" />
+          <NavigationProperty Name="ALBUM" Relationship="Self.FK_HINHANH_ALBUM" FromRole="HINHANHs" ToRole="ALBUMs" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK_HINHANH_TAIKHOAN" FromRole="HINHANHs" ToRole="TAIKHOANs" />
+        </EntityType>
+        <EntityType Name="LICHLAMVIEC">
+          <Key>
+            <PropertyRef Name="IdLLV" />
+          </Key>
+          <Property Name="IdLLV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TieuDe" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LinkNoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayDang" Type="DateTime" Precision="3" />
+          <Property Name="NhacLich" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LuotXem" Type="Int32" />
+          <Property Name="IdTaiKhoan" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK_LICHLAMVIEC_TAIKHOAN" FromRole="LICHLAMVIECs" ToRole="TAIKHOANs" />
+        </EntityType>
+        <EntityType Name="PHONGBAN">
+          <Key>
+            <PropertyRef Name="IdPB" />
+          </Key>
+          <Property Name="IdPB" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenPhong" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CANBOes" Relationship="Self.FK_CANBO_PHONGBAN" FromRole="PHONGBANs" ToRole="CANBOes" />
+        </EntityType>
+        <EntityType Name="TAIKHOAN">
+          <Key>
+            <PropertyRef Name="IdTK" />
+          </Key>
+          <Property Name="IdTK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RetypePassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AnhDaiDien" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Quyen" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BAIVIETs" Relationship="Self.FK_BAIVIET_TAIKHOAN1" FromRole="TAIKHOANs" ToRole="BAIVIETs" />
+          <NavigationProperty Name="BINHLUANs" Relationship="Self.FK_BINHLUAN_TAIKHOAN" FromRole="TAIKHOANs" ToRole="BINHLUANs" />
+          <NavigationProperty Name="CANBOes" Relationship="Self.FK_CANBO_TAIKHOAN" FromRole="TAIKHOANs" ToRole="CANBOes" />
+          <NavigationProperty Name="HINHANHs" Relationship="Self.FK_HINHANH_TAIKHOAN" FromRole="TAIKHOANs" ToRole="HINHANHs" />
+          <NavigationProperty Name="LICHLAMVIECs" Relationship="Self.FK_LICHLAMVIEC_TAIKHOAN" FromRole="TAIKHOANs" ToRole="LICHLAMVIECs" />
+          <NavigationProperty Name="TAILIEUx" Relationship="Self.FK_TAILIEU_TAIKHOAN" FromRole="TAIKHOANs" ToRole="TAILIEUx" />
+          <NavigationProperty Name="THONGBAOs" Relationship="Self.FK_THONGBAO_TAIKHOAN1" FromRole="TAIKHOANs" ToRole="THONGBAOs" />
+          <NavigationProperty Name="VIDEOs" Relationship="Self.FK_VIDEO_TAIKHOAN" FromRole="TAIKHOANs" ToRole="VIDEOs" />
+        </EntityType>
+        <EntityType Name="TAILIEU">
+          <Key>
+            <PropertyRef Name="IdTL" />
+          </Key>
+          <Property Name="IdTL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TieuDe" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LinkNoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayDang" Type="DateTime" Precision="3" />
+          <Property Name="LuotXem" Type="Int32" />
+          <Property Name="IdTaiKhoan" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK_TAILIEU_TAIKHOAN" FromRole="TAILIEUx" ToRole="TAIKHOANs" />
+        </EntityType>
+        <EntityType Name="THELOAIBAIVIET">
+          <Key>
+            <PropertyRef Name="IdTheLoai" />
+          </Key>
+          <Property Name="IdTheLoai" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenTheLoai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BAIVIETs" Relationship="Self.FK_BAIVIET_THELOAIBAIVIET" FromRole="THELOAIBAIVIETs" ToRole="BAIVIETs" />
+        </EntityType>
+        <EntityType Name="THONGBAO">
+          <Key>
+            <PropertyRef Name="IdTB" />
+          </Key>
+          <Property Name="IdTB" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TieuDe" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayDang" Type="DateTime" Precision="3" />
+          <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdTaiKhoan" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK_THONGBAO_TAIKHOAN1" FromRole="THONGBAOs" ToRole="TAIKHOANs" />
+        </EntityType>
+        <EntityType Name="VIDEO">
+          <Key>
+            <PropertyRef Name="IdVideo" />
+          </Key>
+          <Property Name="IdVideo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenVideo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NgayDang" Type="DateTime" Precision="3" />
+          <Property Name="LinkVideo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IdAlbum" Type="Int32" />
+          <Property Name="IdTaiKhoan" Type="Int32" />
+          <NavigationProperty Name="ALBUM" Relationship="Self.FK_VIDEO_ALBUM" FromRole="VIDEOs" ToRole="ALBUMs" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK_VIDEO_TAIKHOAN" FromRole="VIDEOs" ToRole="TAIKHOANs" />
+        </EntityType>
+        <Association Name="FK_HINHANH_ALBUM">
+          <End Role="ALBUMs" Type="Self.ALBUM" Multiplicity="0..1" />
+          <End Role="HINHANHs" Type="Self.HINHANH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALBUMs">
+              <PropertyRef Name="IdAlbum" />
+            </Principal>
+            <Dependent Role="HINHANHs">
+              <PropertyRef Name="IdAlbum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIDEO_ALBUM">
+          <End Role="ALBUMs" Type="Self.ALBUM" Multiplicity="0..1" />
+          <End Role="VIDEOs" Type="Self.VIDEO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALBUMs">
+              <PropertyRef Name="IdAlbum" />
+            </Principal>
+            <Dependent Role="VIDEOs">
+              <PropertyRef Name="IdAlbum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BAIVIET_TAIKHOAN1">
+          <End Role="TAIKHOANs" Type="Self.TAIKHOAN" Multiplicity="1" />
+          <End Role="BAIVIETs" Type="Self.BAIVIET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANs">
+              <PropertyRef Name="IdTK" />
+            </Principal>
+            <Dependent Role="BAIVIETs">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BAIVIET_THELOAIBAIVIET">
+          <End Role="THELOAIBAIVIETs" Type="Self.THELOAIBAIVIET" Multiplicity="1" />
+          <End Role="BAIVIETs" Type="Self.BAIVIET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THELOAIBAIVIETs">
+              <PropertyRef Name="IdTheLoai" />
+            </Principal>
+            <Dependent Role="BAIVIETs">
+              <PropertyRef Name="IdTheLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BINHLUAN_BAIVIET">
+          <End Role="BAIVIETs" Type="Self.BAIVIET" Multiplicity="1" />
+          <End Role="BINHLUANs" Type="Self.BINHLUAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAIVIETs">
+              <PropertyRef Name="IdBV" />
+            </Principal>
+            <Dependent Role="BINHLUANs">
+              <PropertyRef Name="IdBaiViet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BINHLUAN_TAIKHOAN">
+          <End Role="TAIKHOANs" Type="Self.TAIKHOAN" Multiplicity="1" />
+          <End Role="BINHLUANs" Type="Self.BINHLUAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANs">
+              <PropertyRef Name="IdTK" />
+            </Principal>
+            <Dependent Role="BINHLUANs">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CANBO_PHONGBAN">
+          <End Role="PHONGBANs" Type="Self.PHONGBAN" Multiplicity="0..1" />
+          <End Role="CANBOes" Type="Self.CANBO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHONGBANs">
+              <PropertyRef Name="IdPB" />
+            </Principal>
+            <Dependent Role="CANBOes">
+              <PropertyRef Name="IdPhongBan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CANBO_TAIKHOAN">
+          <End Role="TAIKHOANs" Type="Self.TAIKHOAN" Multiplicity="0..1" />
+          <End Role="CANBOes" Type="Self.CANBO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANs">
+              <PropertyRef Name="IdTK" />
+            </Principal>
+            <Dependent Role="CANBOes">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HINHANH_TAIKHOAN">
+          <End Role="TAIKHOANs" Type="Self.TAIKHOAN" Multiplicity="0..1" />
+          <End Role="HINHANHs" Type="Self.HINHANH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANs">
+              <PropertyRef Name="IdTK" />
+            </Principal>
+            <Dependent Role="HINHANHs">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHLAMVIEC_TAIKHOAN">
+          <End Role="TAIKHOANs" Type="Self.TAIKHOAN" Multiplicity="1" />
+          <End Role="LICHLAMVIECs" Type="Self.LICHLAMVIEC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANs">
+              <PropertyRef Name="IdTK" />
+            </Principal>
+            <Dependent Role="LICHLAMVIECs">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAILIEU_TAIKHOAN">
+          <End Role="TAIKHOANs" Type="Self.TAIKHOAN" Multiplicity="1" />
+          <End Role="TAILIEUx" Type="Self.TAILIEU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANs">
+              <PropertyRef Name="IdTK" />
+            </Principal>
+            <Dependent Role="TAILIEUx">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THONGBAO_TAIKHOAN1">
+          <End Role="TAIKHOANs" Type="Self.TAIKHOAN" Multiplicity="1" />
+          <End Role="THONGBAOs" Type="Self.THONGBAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANs">
+              <PropertyRef Name="IdTK" />
+            </Principal>
+            <Dependent Role="THONGBAOs">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIDEO_TAIKHOAN">
+          <End Role="TAIKHOANs" Type="Self.TAIKHOAN" Multiplicity="0..1" />
+          <End Role="VIDEOs" Type="Self.VIDEO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANs">
+              <PropertyRef Name="IdTK" />
+            </Principal>
+            <Dependent Role="VIDEOs">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Web_KTCKEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ALBUMs" EntityType="Self.ALBUM" />
+          <EntitySet Name="BAIVIETs" EntityType="Self.BAIVIET" />
+          <EntitySet Name="BINHLUANs" EntityType="Self.BINHLUAN" />
+          <EntitySet Name="CANBOes" EntityType="Self.CANBO" />
+          <EntitySet Name="HINHANHs" EntityType="Self.HINHANH" />
+          <EntitySet Name="LICHLAMVIECs" EntityType="Self.LICHLAMVIEC" />
+          <EntitySet Name="PHONGBANs" EntityType="Self.PHONGBAN" />
+          <EntitySet Name="TAIKHOANs" EntityType="Self.TAIKHOAN" />
+          <EntitySet Name="TAILIEUx" EntityType="Self.TAILIEU" />
+          <EntitySet Name="THELOAIBAIVIETs" EntityType="Self.THELOAIBAIVIET" />
+          <EntitySet Name="THONGBAOs" EntityType="Self.THONGBAO" />
+          <EntitySet Name="VIDEOs" EntityType="Self.VIDEO" />
+          <AssociationSet Name="FK_HINHANH_ALBUM" Association="Self.FK_HINHANH_ALBUM">
+            <End Role="ALBUMs" EntitySet="ALBUMs" />
+            <End Role="HINHANHs" EntitySet="HINHANHs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIDEO_ALBUM" Association="Self.FK_VIDEO_ALBUM">
+            <End Role="ALBUMs" EntitySet="ALBUMs" />
+            <End Role="VIDEOs" EntitySet="VIDEOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BAIVIET_TAIKHOAN1" Association="Self.FK_BAIVIET_TAIKHOAN1">
+            <End Role="TAIKHOANs" EntitySet="TAIKHOANs" />
+            <End Role="BAIVIETs" EntitySet="BAIVIETs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BAIVIET_THELOAIBAIVIET" Association="Self.FK_BAIVIET_THELOAIBAIVIET">
+            <End Role="THELOAIBAIVIETs" EntitySet="THELOAIBAIVIETs" />
+            <End Role="BAIVIETs" EntitySet="BAIVIETs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BINHLUAN_BAIVIET" Association="Self.FK_BINHLUAN_BAIVIET">
+            <End Role="BAIVIETs" EntitySet="BAIVIETs" />
+            <End Role="BINHLUANs" EntitySet="BINHLUANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BINHLUAN_TAIKHOAN" Association="Self.FK_BINHLUAN_TAIKHOAN">
+            <End Role="TAIKHOANs" EntitySet="TAIKHOANs" />
+            <End Role="BINHLUANs" EntitySet="BINHLUANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CANBO_PHONGBAN" Association="Self.FK_CANBO_PHONGBAN">
+            <End Role="PHONGBANs" EntitySet="PHONGBANs" />
+            <End Role="CANBOes" EntitySet="CANBOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CANBO_TAIKHOAN" Association="Self.FK_CANBO_TAIKHOAN">
+            <End Role="TAIKHOANs" EntitySet="TAIKHOANs" />
+            <End Role="CANBOes" EntitySet="CANBOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HINHANH_TAIKHOAN" Association="Self.FK_HINHANH_TAIKHOAN">
+            <End Role="TAIKHOANs" EntitySet="TAIKHOANs" />
+            <End Role="HINHANHs" EntitySet="HINHANHs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHLAMVIEC_TAIKHOAN" Association="Self.FK_LICHLAMVIEC_TAIKHOAN">
+            <End Role="TAIKHOANs" EntitySet="TAIKHOANs" />
+            <End Role="LICHLAMVIECs" EntitySet="LICHLAMVIECs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAILIEU_TAIKHOAN" Association="Self.FK_TAILIEU_TAIKHOAN">
+            <End Role="TAIKHOANs" EntitySet="TAIKHOANs" />
+            <End Role="TAILIEUx" EntitySet="TAILIEUx" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THONGBAO_TAIKHOAN1" Association="Self.FK_THONGBAO_TAIKHOAN1">
+            <End Role="TAIKHOANs" EntitySet="TAIKHOANs" />
+            <End Role="THONGBAOs" EntitySet="THONGBAOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIDEO_TAIKHOAN" Association="Self.FK_VIDEO_TAIKHOAN">
+            <End Role="TAIKHOANs" EntitySet="TAIKHOANs" />
+            <End Role="VIDEOs" EntitySet="VIDEOs" />
+          </AssociationSet>
+          <FunctionImport Name="RP_BaiViet" ReturnType="Collection(Web_KTCKModel.RP_BaiViet_Result)">
+            <Parameter Name="IDBaiViet" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="RP_BaiViet_Result">
+          <Property Type="Int32" Name="IdBV" Nullable="false" />
+          <Property Type="String" Name="TieuDe" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="TomTat" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NoiDung" Nullable="true" />
+          <Property Type="DateTime" Name="NgayDang" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TacGia" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="AnhBV" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="NgayCapNhat" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TrangThai" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Slide" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="LuotXem" Nullable="true" />
+          <Property Type="Int32" Name="IdTaiKhoan" Nullable="false" />
+          <Property Type="Int32" Name="IdTheLoai" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Web_KTCKModelStoreContainer" CdmEntityContainer="Web_KTCKEntities">
+          <EntitySetMapping Name="ALBUMs">
+            <EntityTypeMapping TypeName="Web_KTCKModel.ALBUM">
+              <MappingFragment StoreEntitySet="ALBUMs">
+                <ScalarProperty Name="IdAlbum" ColumnName="IdAlbum" />
+                <ScalarProperty Name="TenAlbum" ColumnName="TenAlbum" />
+                <ScalarProperty Name="AnhDaiDien" ColumnName="AnhDaiDien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BAIVIETs">
+            <EntityTypeMapping TypeName="Web_KTCKModel.BAIVIET">
+              <MappingFragment StoreEntitySet="BAIVIETs">
+                <ScalarProperty Name="IdBV" ColumnName="IdBV" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="TomTat" ColumnName="TomTat" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="TacGia" ColumnName="TacGia" />
+                <ScalarProperty Name="AnhBV" ColumnName="AnhBV" />
+                <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="Slide" ColumnName="Slide" />
+                <ScalarProperty Name="LuotXem" ColumnName="LuotXem" />
+                <ScalarProperty Name="IdTaiKhoan" ColumnName="IdTaiKhoan" />
+                <ScalarProperty Name="IdTheLoai" ColumnName="IdTheLoai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BINHLUANs">
+            <EntityTypeMapping TypeName="Web_KTCKModel.BINHLUAN">
+              <MappingFragment StoreEntitySet="BINHLUANs">
+                <ScalarProperty Name="IdBL" ColumnName="IdBL" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="NgayBinhLuan" ColumnName="NgayBinhLuan" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="UrlBaiViet" ColumnName="UrlBaiViet" />
+                <ScalarProperty Name="IdBaiViet" ColumnName="IdBaiViet" />
+                <ScalarProperty Name="IdTaiKhoan" ColumnName="IdTaiKhoan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CANBOes">
+            <EntityTypeMapping TypeName="Web_KTCKModel.CANBO">
+              <MappingFragment StoreEntitySet="CANBOes">
+                <ScalarProperty Name="IdCB" ColumnName="IdCB" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
+                <ScalarProperty Name="BangCap" ColumnName="BangCap" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="QueQuan" ColumnName="QueQuan" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="SoDT" ColumnName="SoDT" />
+                <ScalarProperty Name="AnhMoTa" ColumnName="AnhMoTa" />
+                <ScalarProperty Name="ChiTiet" ColumnName="ChiTiet" />
+                <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
+                <ScalarProperty Name="IdTaiKhoan" ColumnName="IdTaiKhoan" />
+                <ScalarProperty Name="IdPhongBan" ColumnName="IdPhongBan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HINHANHs">
+            <EntityTypeMapping TypeName="Web_KTCKModel.HINHANH">
+              <MappingFragment StoreEntitySet="HINHANHs">
+                <ScalarProperty Name="IdHinhAnh" ColumnName="IdHinhAnh" />
+                <ScalarProperty Name="TenHinhAnh" ColumnName="TenHinhAnh" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="HinhAnh1" ColumnName="HinhAnh" />
+                <ScalarProperty Name="IdAlbum" ColumnName="IdAlbum" />
+                <ScalarProperty Name="IdTaiKhoan" ColumnName="IdTaiKhoan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LICHLAMVIECs">
+            <EntityTypeMapping TypeName="Web_KTCKModel.LICHLAMVIEC">
+              <MappingFragment StoreEntitySet="LICHLAMVIECs">
+                <ScalarProperty Name="IdLLV" ColumnName="IdLLV" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="LinkNoiDung" ColumnName="LinkNoiDung" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="NhacLich" ColumnName="NhacLich" />
+                <ScalarProperty Name="LuotXem" ColumnName="LuotXem" />
+                <ScalarProperty Name="IdTaiKhoan" ColumnName="IdTaiKhoan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PHONGBANs">
+            <EntityTypeMapping TypeName="Web_KTCKModel.PHONGBAN">
+              <MappingFragment StoreEntitySet="PHONGBANs">
+                <ScalarProperty Name="IdPB" ColumnName="IdPB" />
+                <ScalarProperty Name="TenPhong" ColumnName="TenPhong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAIKHOANs">
+            <EntityTypeMapping TypeName="Web_KTCKModel.TAIKHOAN">
+              <MappingFragment StoreEntitySet="TAIKHOANs">
+                <ScalarProperty Name="IdTK" ColumnName="IdTK" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RetypePassword" ColumnName="RetypePassword" />
+                <ScalarProperty Name="AnhDaiDien" ColumnName="AnhDaiDien" />
+                <ScalarProperty Name="Quyen" ColumnName="Quyen" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAILIEUx">
+            <EntityTypeMapping TypeName="Web_KTCKModel.TAILIEU">
+              <MappingFragment StoreEntitySet="TAILIEUx">
+                <ScalarProperty Name="IdTL" ColumnName="IdTL" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="LinkNoiDung" ColumnName="LinkNoiDung" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="LuotXem" ColumnName="LuotXem" />
+                <ScalarProperty Name="IdTaiKhoan" ColumnName="IdTaiKhoan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THELOAIBAIVIETs">
+            <EntityTypeMapping TypeName="Web_KTCKModel.THELOAIBAIVIET">
+              <MappingFragment StoreEntitySet="THELOAIBAIVIETs">
+                <ScalarProperty Name="IdTheLoai" ColumnName="IdTheLoai" />
+                <ScalarProperty Name="TenTheLoai" ColumnName="TenTheLoai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THONGBAOs">
+            <EntityTypeMapping TypeName="Web_KTCKModel.THONGBAO">
+              <MappingFragment StoreEntitySet="THONGBAOs">
+                <ScalarProperty Name="IdTB" ColumnName="IdTB" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="IdTaiKhoan" ColumnName="IdTaiKhoan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VIDEOs">
+            <EntityTypeMapping TypeName="Web_KTCKModel.VIDEO">
+              <MappingFragment StoreEntitySet="VIDEOs">
+                <ScalarProperty Name="IdVideo" ColumnName="IdVideo" />
+                <ScalarProperty Name="TenVideo" ColumnName="TenVideo" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="LinkVideo" ColumnName="LinkVideo" />
+                <ScalarProperty Name="IdAlbum" ColumnName="IdAlbum" />
+                <ScalarProperty Name="IdTaiKhoan" ColumnName="IdTaiKhoan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="RP_BaiViet" FunctionName="Web_KTCKModel.Store.RP_BaiViet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Web_KTCKModel.RP_BaiViet_Result">
+                <ScalarProperty Name="IdBV" ColumnName="IdBV" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="TomTat" ColumnName="TomTat" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="TacGia" ColumnName="TacGia" />
+                <ScalarProperty Name="AnhBV" ColumnName="AnhBV" />
+                <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="Slide" ColumnName="Slide" />
+                <ScalarProperty Name="LuotXem" ColumnName="LuotXem" />
+                <ScalarProperty Name="IdTaiKhoan" ColumnName="IdTaiKhoan" />
+                <ScalarProperty Name="IdTheLoai" ColumnName="IdTheLoai" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

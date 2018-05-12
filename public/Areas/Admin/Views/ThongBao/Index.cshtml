@@ -1,0 +1,243 @@
+﻿@model PagedList.PagedList<Web_AMO_MVC.Models.THONGBAO>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Thông báo";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Danh sách thông báo</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div>
+                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalThemThongBao">Thêm</button>
+                        <div class="navbar-right" style="margin-top:-10px;">
+                            @using (Html.BeginForm("Index", "ThongBao", FormMethod.Get))
+                            {
+                                <div class="navbar-form" role="search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="tukhoa" style="border-bottom-left-radius:3px;border-top-left-radius:3px" placeholder="Nhập từ khóa">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-default" id="btnsubmit" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="table-responsive" style="margin-top:10px;">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Mã thông báo</th>
+                                    <th>Tiêu đề</th>
+                                    <th>Nội dung</th>
+                                    <th>Ngày đăng</th>
+                                    <th>Trạng thái</th>
+                                    <th>Người đăng</th>
+                                    <th style="text-align:center;">Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    foreach (var tb in Model)
+                                    {
+                                        <tr>
+                                            <td>@tb.IdTB</td>
+                                            <td id="tieude-@tb.IdTB">@tb.TieuDe</td>
+                                            @if (tb.NoiDung.Length > 200)
+                                            {
+                                                <td id="noidung-@tb.IdTB">@tb.NoiDung.Substring(0, 200)...</td>
+                                            }
+                                            else
+                                            {
+                                                <td id="noidung-@tb.IdTB">@tb.NoiDung</td>
+                                            }
+
+                                            <td id="ngaydang-@tb.IdTB">@tb.NgayDang.Value.ToString("dd/MM/yyyy hh:mm tt")</td>
+                                            <td id="trangthai-@tb.IdTB">@tb.TrangThai</td>
+                                            <td id="idtaikhoan-@tb.IdTB">@tb.TAIKHOAN.HoTen</td>
+                                            <td>
+                                                <div class="tools" style="text-align:center;">
+                                                    <a data-toggle="modal" data-target="#modalSuaThongBao" onclick="LoadData(@tb.IdTB)"><i class="glyphicon glyphicon-edit" data-toggle="tooltip" title="Edit"></i></a>
+                                                    <a onclick="return confirm('Bạn có muốn xóa không?')" href="~/Admin/ThongBao/Xoa/@tb.IdTB"><i class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Delete"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    Có tất cả: <span style="font-weight:bold"> @ViewBag.Count</span> thông báo <br />
+    Trang: <span style="font-weight:bold"> @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount</span>
+    @if (Model.PageCount <= 1)
+    {
+    }
+    else
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, @tukhoa = @ViewBag.TuKhoa }))
+    }
+</div>
+
+<!--Modal-->
+<div class="modal fade" id="modalThemThongBao" role="dialog">
+    <div class="modal-dialog">
+        @using (Html.BeginForm("Them", "ThongBao", FormMethod.Post))
+        {
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Thêm mới thông báo</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>Tiêu đề thông báo</label> <label id="errtieude"></label>
+                            <textarea class="form-control" id="txttieude" name="TieuDe" placeholder="Nhập tiêu đề thông báo" rows="2"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Nội dung thông báo</label> <label id="errnoidung"></label>
+                            <textarea class="form-control" id="txtnoidung" name="NoiDung" placeholder="Nhập nội dung thông báo" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày đăng </label> <label style="font-weight:normal"> (Nếu không chọn thì mặc địch lấy ngày giờ hiện tại)</label>
+                            <input type="datetime-local" class="form-control" name="NgayDang" placeholder="Nhập ngày đăng thông báo">
+                        </div>
+                        <div class="form-group">
+                            <label>Trạng thái</label> <label id="errtrangthai"></label>
+                            <select class="form-control" name="TrangThai">
+                                <option>Có hiệu lực</option>
+                                <option>Không có hiệu lực</option>
+                            </select>
+                        </div>
+                        <div hidden class="form-group">
+                            <label>Người đăng</label>
+                            <input type="text" class="form-control" name="IdTaiKhoan" value="@Session["IdTK"]">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnluu" class="btn btn-success">Lưu</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy bỏ</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+    function LoadData(id) {
+        $("#ma-tb").val(id);
+        var tieuDe = $("#tieude-" + id + "").html();
+        $("#tieu-de").val(tieuDe);
+
+        var noiDung = $("#noidung-" + id + "").html();
+        $("#noi-dung").val(noiDung);
+
+        var ngayDang = $("#ngaydang-" + id + "").html();
+        $("#ngay-dang").text(ngayDang);
+
+        var trangThai = $("#trangthai-" + id + "").html();
+        $("#trang-thai").val(trangThai);
+
+    }
+</script>
+
+<script type="text/javascript" language="javascript">
+    $('#btnluu').click(function () {
+        var error = 0;
+        if ($('#txttieude').val() == "") {
+            $('#errtieude').text("(*)");
+            $('#errtieude').css("color", "#FA5858");
+            error++;
+        }
+        else {
+            $('#errtieude').text("");
+            $('#errtieude').css("color", "#666");
+        }
+        if ($('#txtnoidung').val() == "") {
+            $('#errnoidung').text("(*)");
+            $('#errnoidung').css("color", "#FA5858");
+            error++;
+        }
+        else {
+            $('#errnoidung').text("");
+            $('#errnoidung').css("color", "#666");
+        }
+
+        if (error != 0) {
+            return false;
+        }
+        else
+            return true;
+    });
+</script>
+
+<!--Modal-->
+<div class="modal fade" id="modalSuaThongBao" role="dialog">
+    <div class="modal-dialog">
+        @using (Html.BeginForm("Sua", "ThongBao", FormMethod.Post))
+        {
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Sửa thông báo</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box-body">
+                        <div class="form-group" hidden>
+                            <label>Mã thông báo</label>
+                            <input type="text" class="form-control" id="ma-tb" name="IdTB">
+                        </div>
+                        <div class="form-group">
+                            <label>Tiêu đề thông báo</label>
+                            <textarea class="form-control" id="tieu-de" name="TieuDe" placeholder="Nhập tiêu đề thông báo" rows="2"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Nội dung thông báo</label>
+                            <textarea class="form-control" id="noi-dung" name="NoiDung" placeholder="Nhập nội dung thông báo" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày đăng </label> &nbsp; &nbsp; &nbsp;<label id="ngay-dang" name="NgayDang"></label>
+                            <input type="datetime-local" class="form-control" name="NgayDang" placeholder="Nhập ngày đăng thông báo">
+                        </div>
+                        <div class="form-group">
+                            <label>Trạng thái</label>
+                            <select class="form-control" id="trang-thai" name="TrangThai">
+                                <option>Có hiệu lực</option>
+                                <option>Không có hiệu lực</option>
+                            </select>
+                        </div>
+                        <div hidden class="form-group">
+                            <label>Người đăng</label>
+                            <input type="text" class="form-control" name="IdTaiKhoan" value="@Session["IdTK"]">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Lưu</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy bỏ</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,478 @@
+﻿@model PagedList.PagedList<Web_AMO_MVC.Models.CANBO>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Cán bộ nhân viên";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Danh sách cán bộ nhân viên</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div>
+                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalThemCanBo">Thêm</button>
+
+                        <div class="navbar-right" style="margin-top:-10px;">
+                            @using (Html.BeginForm("Index", "CanBoNhanVien", FormMethod.Get))
+                            {
+                                <div class="navbar-form" role="search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="tukhoa" style="border-bottom-left-radius:3px;border-top-left-radius:3px" placeholder="Nhập từ khóa">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-default" id="btnsubmit" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="table-responsive" style="margin-top:10px;">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Mã cán bộ</th>
+                                    <th>Họ tên</th>
+                                    <th>Chức vụ</th>
+                                    <th>Phòng ban</th>
+                                    <th>Bằng cấp</th>
+                                    <th>Email</th>
+                                    <th>Quê quán</th>
+                                    <th>Ngày sinh</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Ngày cập nhật</th>
+                                    <th>Ảnh đại diện</th>
+                                    <th hidden>Chi tiết</th>
+                                    <th>Người đăng</th>
+                                    <th style="text-align:center;">Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    foreach (var canbonv in Model)
+                                    {
+                                        <tr>
+                                            <td>@canbonv.IdCB</td>
+                                            <td id="hoten-@canbonv.IdCB">@canbonv.HoTen</td>
+                                            <td id="chucvu-@canbonv.IdCB">@canbonv.ChucVu</td>
+                                            <td>
+                                                <input hidden id="phongban-@canbonv.IdCB" value="@canbonv.IdPhongBan" />
+                                                <span>@canbonv.PHONGBAN.TenPhong</span>
+                                            </td>
+                                            <td id="bangcap-@canbonv.IdCB">@canbonv.BangCap</td>
+                                            <td id="email-@canbonv.IdCB">@canbonv.Email</td>
+                                            <td id="quequan-@canbonv.IdCB">@canbonv.QueQuan</td>
+                                            <td id="ngaysinh-@canbonv.IdCB">@canbonv.NgaySinh.Value.ToString("dd/MM/yyyy")</td>
+                                            <td id="sdt-@canbonv.IdCB">@canbonv.SoDT</td>
+                                            <td id="ngaycapnhat-@canbonv.IdCB">@canbonv.NgayCapNhat.Value.ToString("dd/MM/yyyy hh:mm tt")</td>
+                                            <td hidden id="anhmota-@canbonv.IdCB">@canbonv.AnhMoTa</td>
+                                            <td><img src="@canbonv.AnhMoTa" style="max-width:70px;" /></td>
+                                            <td hidden id="chitiet-@canbonv.IdCB">@canbonv.ChiTiet</td>
+                                            <td id="nguoidang-@canbonv.IdCB">@canbonv.TAIKHOAN.HoTen</td>
+                                            <td>
+                                                <div class="tools" style="text-align:center;">
+                                                    <a href="~/Admin/CanBoNhanVien/ChiTiet/@canbonv.IdCB" style="margin-right:2px"><i class="glyphicon glyphicon-th-list" data-toggle="tooltip" title="Chi tiết"></i></a>
+                                                    <a data-toggle="modal" data-target="#modalSuaCanBo" onclick="LoadData(@canbonv.IdCB)"><i class="glyphicon glyphicon-edit" data-toggle="tooltip" title="Sửa"></i></a>
+                                                    <a onclick="return confirm('Bạn có muốn xóa không?')" href="~/Admin/CanBoNhanVien/Xoa/@canbonv.IdCB"><i class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Xóa"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    Có tất cả: <span style="font-weight:bold"> @ViewBag.Count</span> cán bộ nhân viên <br />
+    Trang: <span style="font-weight:bold"> @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount</span>
+    @if (Model.PageCount <= 1)
+    {
+    }
+    else
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, @tukhoa = @ViewBag.Tukhoa }))
+    }
+</div>
+
+<!--Sửa-->
+<script type="text/javascript">
+    function LoadData(id) {
+        $("#ma-cbnv").val(id);
+        var hoTen = $("#hoten-" + id + "").html();
+        $("#ho-ten").val(hoTen);
+        var chucVu = $("#chucvu-" + id + "").html();
+        $("#chuc-vu").val(chucVu);
+
+        var phongBan = $("#phongban-" + id + "").val();
+        $("#phong-ban").val(phongBan);
+
+        var bangCap = $("#bangcap-" + id + "").html();
+        $("#bang-cap").val(bangCap);
+
+        var email = $("#email-" + id + "").html();
+        $("#email").val(email);
+
+        var chiTiet = $("#chitiet-" + id + "").html();
+        $("#chi-tiet").val(chiTiet);
+
+        var queQuan = $("#quequan-" + id + "").html();
+        $("#que-quan").val(queQuan);
+
+        var ngaySinh = $("#ngaysinh-" + id + "").html();
+        $("#ngay-sinh").text(ngaySinh);
+
+        var sdt = $("#sdt-" + id + "").html();
+        $("#sdt").val(sdt);
+
+        var anhMoTa = $("#anhmota-" + id + "").html();
+        $("#anh-mo-ta").val(anhMoTa);
+
+        var ngayCapNhat = $("#ngaycapnhat-" + id + "").html();
+        $("#ngay-cap-nhat").text(ngayCapNhat);
+
+    }
+
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="modalThemCanBo" role="dialog">
+    <div class="modal-dialog modal-lg">
+        @using (Html.BeginForm("Them", "CanBoNhanVien", FormMethod.Post))
+        {
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Thêm mới cán bộ nhân viên</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Họ tên cán bộ <label id="errhoten"></label></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" autofocus id="txthoten" name="HoTen" placeholder="Nhập họ tên cán bộ nhân viên">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Chức vụ <label id="errchucvu"></label></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="txtchucvu" name="ChucVu" placeholder="Nhập chức vụ của cán bộ nhân viên" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Phòng ban <label id="errphongban"></label></label>
+                                <div class="col-sm-9">
+                                    @Html.DropDownList("IdPhongBan", null, new { @class = "form-control" })
+                                    @*<input type="text" class="form-control" id="txtphongban" name="IdPhongBan" placeholder="Nhập phòng làm việc" />*@
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Bằng cấp <label id="errbangcap"></label></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="txtbangcap" name="BangCap" placeholder="Nhập bằng cấp cán bộ nhân viên" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Email <label id="erremail"></label></label>
+                                <div class="col-sm-9">
+                                    <input type="email" class="form-control" id="txtemail" name="Email" placeholder="Nhập email cán bộ nhân viên " />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Ngày sinh <label id="errngaysinh"></label></label>
+                                <div class="col-sm-4">
+                                    <input type="date" class="form-control" id="txtngaysinh" name="NgaySinh" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Quê quán <label id="errquequan"></label></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="txtquequan" name="QueQuan" placeholder="Nhập quê quán cán bộ nhân viên " />
+                                </div>
+                            </div>
+                            <div hidden class="form-group">
+                                <label class="col-sm-3 control-label">Ngày cập nhật</label>
+                                <div class="col-sm-9">
+                                    <input type="datetime-local" class="form-control" id="txtngaycapnhat" name="NgayCapNhat" placeholder="Nhập ngày cập nhập cuối cùng" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Số điện thoại <label id="errsdt"></label></label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="txtsdt" name="SoDT" placeholder="Nhập số điện thoại cán bộ nhân viên" />
+                                </div>
+                            </div>
+
+                            <div hidden class="form-group">
+                                <label class="col-sm-3 control-label">Người đăng </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="IdTaiKhoan" value="@Session["IdTK"]" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Hình ảnh đại diện <label id="errhinhanh"></label></label>
+                                <div class="col-sm-7">
+                                    <input type="text" readonly class="form-control" name="AnhMoTa" id="txthinhanh" placeholder="Chọn hình ảnh cán bộ nhân viên">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="button" class="form-control btn-primary" id="ChonAnh" value="Chọn...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Thông tin chi tiết <label id="errthongtin"></label></label>
+                                <div class="col-sm-9">
+                                    <textarea class="textarea" id="txtthongtin" name="ChiTiet" placeholder="Nhập chi tiết cán bộ nhân viên" style="width: 100%;  height: 100px; font-size: 14px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnluu" class="btn btn-success">Lưu</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy bỏ</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!--Thêm ảnh-->
+<script language="javascript" type="text/javascript">
+    $("#ChonAnh").click(function () {
+        var finder = new CKFinder();
+        finder.selectActionFunction = function (fileUrl) {
+            //fileUrl = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
+            $("#txthinhanh").val(fileUrl);
+        };
+        finder.popup();
+    });
+</script>
+
+<!--Bắt lỗi-->
+
+<script type="text/javascript" language="javascript">
+
+    $('#btnluu').click(function () {
+        var error = 0;
+        if ($('#txthoten').val() == "") {
+            $('#errhoten').text("(*)");
+            $('#errhoten').css("color", "#FA5858");
+            error++;
+        }
+        else {
+            $('#errhoten').text("");
+            $('#errhoten').css("color", "#666");
+        }
+        if ($('#txtchucvu').val() == "") {
+            $('#errchucvu').text("(*)");
+            $('#errchucvu').css("color", "#FA5858");
+            error++;
+        }
+        else {
+            $('#errchucvu').text("");
+            $('#errchucvu').css("color", "#666");
+        }
+        if ($('#txtphongban').val() == "") {
+            $('#errphongban').text("(*)");
+            $('#errphongban').css("color", "#FA5858");
+            error++;
+        }
+        else {
+            $('#errphongban').text("");
+            $('#errphongban').css("color", "#666");
+        }
+
+        if ($('#txtbangcap').val() == "") {
+            $('#errbangcap').text("(*)");
+            $('#errbangcap').css("color", "#FA5858");
+            error++;
+        }
+        else {
+            $('#errbangcap').text("");
+            $('#errbangcap').css("color", "#666");
+        }
+
+        if ($('#txtquequan').val() == "") {
+            $('#errquequan').text("(*)");
+            $('#errquequan').css("color", "#FA5858");
+            error++;
+        }
+        else {
+            $('#errquequan').text("");
+            $('#errquequan').css("color", "#666");
+        }
+
+        if ($('#txtngaysinh').val() == "") {
+            $('#errngaysinh').text("(*)");
+            $('#errngaysinh').css("color", "#FA5858");
+            error++;
+        }
+        else {
+            $('#errngaysinh').text("");
+            $('#errngaysinh').css("color", "#666");
+        }
+
+        if ($('#txtsdt').val() == "") {
+            $('#errsdt').text("(*)");
+            $('#errsdt').css("color", "#FA5858");
+            error++;
+        }
+        else {
+            $('#errsdt').text("");
+            $('#errsdt').css("color", "#666");
+        }
+        if ($('#txthinhanh').val() == "") {
+            $('#errhinhanh').text("(*)");
+            $('#errhinhanh').css("color", "#FA5858");
+            error++;
+        }
+        else {
+            $('#errhinhanh').text("");
+            $('#errhinhanh').css("color", "#666");
+        }
+        if (error != 0) {
+            return false;
+        }
+        else
+            return true;
+    });
+</script>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalSuaCanBo" role="dialog">
+    <div class="modal-dialog modal-lg">
+        @using (Html.BeginForm("Sua", "CanBoNhanVien", FormMethod.Post))
+        {
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Sửa cán bộ nhân viên</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="box-body">
+                            <div hidden class="form-group">
+                                <label class="col-sm-3 control-label">Mã cán bộ</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="ma-cbnv" name="IdCB">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Họ tên cán bộ</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="ho-ten" name="HoTen" placeholder="Nhập họ tên cán bộ nhân viên">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Chức vụ</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="chuc-vu" name="ChucVu" placeholder="Nhập chức vụ của cán bộ nhân viên" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Phòng ban</label>
+                                <div class="col-sm-9">
+                                    @Html.DropDownList("IdPhongBan", null, new { @class = "form-control", @id = "phong-ban" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Bằng cấp</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="bang-cap" name="BangCap" placeholder="Nhập bằng cấp cán bộ nhân viên" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Email</label>
+                                <div class="col-sm-9">
+                                    <input type="email" class="form-control" id="email" name="Email" placeholder="Nhập email cán bộ nhân viên " />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Ngày sinh</label>
+                                <div class="col-sm-6">
+                                    <input type="date" class="form-control" name="NgaySinh" title="Nhập ngày sinh nếu muốn thay đổi" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="form-control" style="border:none" id="ngay-sinh"></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Quê quán</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="que-quan" name="QueQuan" placeholder="Nhập quê quán cán bộ nhân viên " />
+                                </div>
+                            </div>
+                            <div hidden class="form-group">
+                                <label class="col-sm-3 control-label">Ngày cập nhập</label>
+                                <div class="col-sm-3">
+                                    <label type="text" class="form-control" style="border:none" id="ngay-cap-nhat"></label>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Số điện thoại</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="sdt" name="SoDT" placeholder="Nhập số điện thoại cán bộ nhân viên" />
+                                </div>
+                            </div>
+
+                            <div hidden class="form-group">
+                                <label class="col-sm-3 control-label">Người đăng</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="IdTaiKhoan" value="@Session["IdTK"]" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Hình ảnh đại diện</label>
+                                <div class="col-sm-7">
+                                    <input type="text" readonly class="form-control" id="anh-mo-ta" name="AnhMoTa">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="button" id="SuaAnh" class="form-control btn-primary" value="Chọn...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Chi tiết cán bộ</label>
+                                <div class="col-sm-9">
+                                    <textarea class="textarea" name="ChiTiet" id="chi-tiet" placeholder="Nhập chi tiết cán bộ" style="width: 100%;  height: 100px; font-size: 14px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Lưu</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy bỏ</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!--SỬa ảnh-->
+<script language="javascript" type="text/javascript">
+    $("#SuaAnh").click(function () {
+        var finder = new CKFinder();
+        finder.selectActionFunction = function (fileUrl) {
+            $("#anh-mo-ta").val(fileUrl);
+        };
+        finder.popup();
+    });
+</script>

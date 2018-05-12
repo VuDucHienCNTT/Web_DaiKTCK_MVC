@@ -1,0 +1,10 @@
+﻿@{
+    HttpApplicationState application = HttpContext.Current.ApplicationInstance.Application;
+}
+
+<div>
+    <div style="margin-bottom:6px"><span>&nbsp;&nbsp;&nbsp; <i class="fa fa-child"></i> Đang online: </span><span style="font-weight:bold">@application["online"]</span></div>
+    <div>
+        <span>&nbsp;&nbsp;&nbsp; <i class="fa fa-child"></i> Tổng lượt truy cập: </span><span style="font-weight:bold">@application["counter"]</span>
+    </div>
+</div>

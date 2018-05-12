@@ -1,0 +1,33 @@
+﻿@model Web_AMO_MVC.Models.LICHLAMVIEC
+@{
+    ViewBag.Title = Model.TieuDe;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="well-sm" style="border:1px solid #d5d5d5; margin-bottom:1%;border-radius:unset;">
+    <a href="/">Trang chủ</a> >> <a href="/lich-cong-tac">Lịch công tác</a> >> @Model.TieuDe
+</div>
+
+<span style="font-size:26px;color:#0094ff;font-weight:bold">@Model.TieuDe</span><br />
+<span style="color:#999;" class="glyphicon glyphicon-user"></span><span style="color:#999;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"> @Model.TAIKHOAN.HoTen</span> <span>-</span>
+<span style="color:#999;" class="glyphicon glyphicon-time"></span> <span style="color:#999;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">@Model.NgayDang.Value.ToString("dd/MM/yyyy hh:mm:ss tt")</span> <span>-</span>
+<span style="color:#999;" class="glyphicon glyphicon-eye-open"></span><span style="color:#999;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"> @Model.LuotXem lượt xem</span>
+
+<br />
+<br />
+
+@if (Model.LinkNoiDung.StartsWith("http"))
+{
+    <iframe style="width:100%; height:600px" src="@Model.LinkNoiDung"></iframe>
+}
+else
+{
+    <span>Nội dung lịch công tác:</span> @Html.Raw(Model.LinkNoiDung)<br />
+}
+
+<div>
+    <br />
+    <span style="font-weight:bold">Nhắc lịch: </span> @Model.NhacLich
+</div>
+<br />
+

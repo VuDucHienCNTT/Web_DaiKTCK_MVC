@@ -1,0 +1,60 @@
+﻿@model  List<Web_AMO_MVC.Models.BAIVIET>
+
+<div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" style="font-weight:bold;border-radius:unset" href="#tinmoinhat">Tin mới nhất</a></li>
+        <li><a data-toggle="tab" style="font-weight:bold;border-radius:unset" href="#tinxemnhieu"> Tin xem nhiều</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="tinmoinhat" class="tab-pane fade in active">
+            @if (Model != null)
+            {
+                foreach (var bv in Model.OrderByDescending(n => n.NgayDang).Take(8))
+                {
+                    <div class="row" style="margin-top:8px;">
+                        <div class="col-xs-3" style="float:left;margin-bottom:6px;">
+                            <a href="/chi-tiet/tin-tuc-su-kien/@bv.IdBV/@Web_AMO_MVC.Models.ChuanHoaSEO.ConvertTitle(bv.TieuDe)"><img src="@bv.AnhBV" class="img-responsive" style="height:50px;width:100%" /></a>
+                        </div>
+                        <label class="col-xs-9" style="font-size:13px; line-height:1.3">
+                            @if (bv.TieuDe.Length > 75)
+                            {
+                                <a title="@bv.TieuDe" href="/chi-tiet/tin-tuc-su-kien/@bv.IdBV/@Web_AMO_MVC.Models.ChuanHoaSEO.ConvertTitle(bv.TieuDe)">@bv.TieuDe.Substring(0, 75)...</a>
+                            }
+                            else
+                            {
+                                <a title="@bv.TieuDe" href="/chi-tiet/tin-tuc-su-kien/@bv.IdBV/@Web_AMO_MVC.Models.ChuanHoaSEO.ConvertTitle(bv.TieuDe)">@bv.TieuDe</a>
+                            }
+                        </label>
+                    </div>
+                    <hr />
+                }
+            }
+        </div>
+
+        <div id="tinxemnhieu" class="tab-pane fade">
+            @if (Model != null)
+            {
+                foreach (var bvxemnhieu in Model.OrderByDescending(n => n.LuotXem).Take(8))
+                {
+                    <div class="row" style="margin-top:8px;">
+                        <div class="col-xs-3" style="float:left;margin-bottom:6px;">
+                            <a href="/chi-tiet/tin-tuc-su-kien/@bvxemnhieu.IdBV/@Web_AMO_MVC.Models.ChuanHoaSEO.ConvertTitle(bvxemnhieu.TieuDe)"><img src="@bvxemnhieu.AnhBV" class="img-responsive" style="height:50px;width:100%" /></a>
+                        </div>
+                        <label class="col-xs-9" style="font-size:13px; line-height:1.3">
+                            @if (bvxemnhieu.TieuDe.Length > 75)
+                            {
+                                <a title="@bvxemnhieu.TieuDe" href="/chi-tiet/tin-tuc-su-kien/@bvxemnhieu.IdBV/@Web_AMO_MVC.Models.ChuanHoaSEO.ConvertTitle(bvxemnhieu.TieuDe)">@bvxemnhieu.TieuDe.Substring(0, 75)...</a>
+                            }
+                            else
+                            {
+                                <a title="@bvxemnhieu.TieuDe" href="/chi-tiet/tin-tuc-su-kien/@bvxemnhieu.IdBV/@Web_AMO_MVC.Models.ChuanHoaSEO.ConvertTitle(bvxemnhieu.TieuDe)">@bvxemnhieu.TieuDe</a>
+                            }
+                        </label>
+                    </div>
+                    <hr />
+                }
+            }
+        </div>
+    </div>
+</div>

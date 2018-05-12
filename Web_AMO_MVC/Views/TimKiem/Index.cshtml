@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Tìm kiếm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.1.0.js"></script>
+<div class="well-sm" style="border:1px solid #d5d5d5; margin-bottom:1%;border-radius:unset">
+    <a href="/">Trang chủ</a> >> Tìm kiếm
+</div>
+<div>
+    Từ khóa tìm kiếm: <span style="font-weight:bold">@ViewBag.Tukhoa</span><br />
+    <br />
+
+    <span > Bạn muốn tìm kiếm:</span>
+    <div class="well" style="border:1px solid #d5d5d5; margin-bottom:1%;border-radius:unset">
+        <div class="row" style="line-height:20px;">
+
+            <div class="col-xs-12 col-sm-6" style="margin-bottom:10px;">
+                <label class="radio-inline">
+                    <input type="radio" id="ttsk" name="optradio" onclick="dieuKien()" value="Tin tức - sự kiện">Tin tức - sự kiên
+                </label>
+            </div>
+            <div class="col-xs-12 col-sm-6" style="margin-bottom:10px;">
+                <label class="radio-inline">
+                    <input type="radio" id="cbnv" value="Cán bộ - nhân viên" onclick="dieuKien()" name="optradio">Cán bộ - nhân viên
+                </label>
+            </div>
+
+            <div class="col-xs-12 col-sm-6" style="margin-bottom:10px;">
+                <label class="radio-inline">
+                    <input type="radio" id="cvtl" value="Công văn - tài liệu" onclick="dieuKien()" name="optradio">Công văn - tài liệu
+                </label>
+            </div>
+            <div class="col-xs-12 col-sm-6" style="margin-bottom:10px;">
+                <label class="radio-inline">
+                    <input type="radio" id="lct" value="Lịch công tác" onclick="dieuKien()" name="optradio">Lịch công tác
+                </label>                
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div id="tt" style="display:none">
+        Bạn chọn tìm kiếm: <span style="font-weight:bold">Tin tức - sự kiện</span>
+        @using (Html.BeginForm("BaiViet", "TimKiem", FormMethod.Get))
+        {
+            <span hidden style="font-weight:bold"><input class="form-control" name="tukhoa" type="text" value="@ViewBag.Tukhoa" /></span>
+            <button type="submit" class="btn btn-primary btn-sm pull-right">Tìm kiếm</button>
+        }
+    </div>
+    <div id="cb" style="display:none">
+        Bạn chọn tìm kiếm: <span style="font-weight:bold">Cán bộ - nhân viên</span>
+        @using (Html.BeginForm("CanBo", "TimKiem", FormMethod.Get))
+            {
+            <span hidden style="font-weight:bold"><input class="form-control" name="tukhoa" type="text" value="@ViewBag.Tukhoa" /></span>
+            <button type="submit" class="btn btn-primary btn-sm pull-right">Tìm kiếm</button>
+        }
+    </div>
+    <div id="cv" style="display:none">
+        Bạn chọn tìm kiếm: <span style="font-weight:bold">Công văn - tài liệu</span>
+        @using (Html.BeginForm("CongVan", "TimKiem", FormMethod.Get))
+            {
+            <span hidden style="font-weight:bold"><input class="form-control" name="tukhoa" type="text" value="@ViewBag.Tukhoa" /></span>
+            <button type="submit" class="btn btn-primary btn-sm pull-right">Tìm kiếm</button>
+        }
+    </div>
+    <div id="lct1" style="display:none">
+        Bạn chọn tìm kiếm: <span style="font-weight:bold">Lịch công tác</span>
+        @using (Html.BeginForm("LichCongTac", "TimKiem", FormMethod.Get))
+            {
+            <span hidden style="font-weight:bold"><input class="form-control" name="tukhoa" type="text" value="@ViewBag.Tukhoa" /></span>
+            <button type="submit" class="btn btn-primary btn-sm pull-right">Tìm kiếm</button>
+        }
+    </div>
+    <div id="button">
+        <button onclick="dieuKien()" class="btn btn-primary btn-sm pull-right">Tìm kiếm</button>
+        <span class="pull-right" style="color:#999;line-height:30px">Chọn để tìm kiếm &nbsp;</span>
+    </div>
+</div>
+<br />
+<br />
+
+<script type="text/javascript">
+    function dieuKien() {
+        if (document.getElementById("ttsk").checked == true) {
+            $("#cv").hide();
+            $("#cb").hide();
+            $("#button").hide();
+            $("#lct1").hide();
+            $("#tt").show();
+        }
+
+        else if (document.getElementById("cbnv").checked == true) {
+            $("#tt").hide();
+            $("#button").hide();
+            $("#cv").hide();
+            $("#lct1").hide();
+            $("#cb").show();
+        }
+        else if (document.getElementById("cvtl").checked == true) {
+            $("#tt").hide();
+            $("#button").hide();
+            $("#cb").hide();
+            $("#lct1").hide();
+            $("#cv").show();
+        }
+        else if (document.getElementById("lct").checked == true) {
+            $("#tt").hide();
+            $("#button").hide();
+            $("#cb").hide();
+            $("#cv").hide();
+            $("#lct1").show();
+        }
+        else {
+            alert("Vui lòng chọn trước khi tìm kiếm");
+        }
+    }
+</script>

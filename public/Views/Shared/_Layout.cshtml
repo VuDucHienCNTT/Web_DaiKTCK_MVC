@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title </title>
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet">
+    <link href="~/Content/css/modern-business.css" rel="stylesheet">
+    <link href="~/Content/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.css">
+    <style>
+        a {
+            color: #332e2e;
+        }
+
+            a:hover {
+                text-decoration: none;
+                color: #0094ff;
+            }
+
+        .ulmenu {
+            list-style: none;
+        }
+
+        .limenu {
+            margin: 8px 0px 8px -40px;
+            padding-right: -40px;
+        }
+
+        .amenu {
+            font-weight: bold;
+            color: #ffffff;
+            display: block;
+            height: 40px;
+            line-height: 40px;
+            opacity: 0.8;
+        }
+
+        .ulmenu .limenu .amenu:hover {
+            opacity: 1;
+            color: #ffffff;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div style="width:100%">
+        <img src="~/Content/image_banner/Banner.png" style="width:100%;max-height:150px;min-height:80px;"/>
+    </div>
+    <div class="nav">
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="/">Đài KTCK</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">Thông tin<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="~/gioi-thieu">Giới thiệu</a></li>
+                                        <li><a href="~/can-bo-nhan-vien">Cán bộ - nhân viên</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="~/cong-van-tai-lieu">Công văn - tài liệu</a></li>
+                                <li><a href="~/lich-cong-tac">Lịch công tác</a></li>
+                                <li><a href="~/tin-tuc-su-kien">Tin tức - sự kiện</a></li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">Thư viện <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="~/hinh-anh">Hình ảnh</a></li>
+                                        <li><a href="~/video">Video</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    @if (Session["IdTK"] == null)
+                                    {
+                                        <a href="~/Admin/dang-nhap?returnUrl=@Request.Url.AbsoluteUri"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="return confirm('Bạn có muốn đăng xuất không?')" href="~/Admin/TaiKhoan/DangXuat"><span class="glyphicon glyphicon-log-out"></span> Hi: @Session["HoTen"]</a>
+                                    }
+
+                                </li>
+                                <li><a href="~/Admin/dang-ky"><span class="glyphicon glyphicon-user"></span> Đăng ký</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container body-content">
+        <section class="content-wrapper">
+            <div class="row" style="margin-top:1%;">
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-7">
+                    @RenderBody()
+                </div>
+                <div class="col-md-3">
+                    @using (Html.BeginForm("Index", "TimKiem", FormMethod.Get))
+                    {
+                        <div style="margin-bottom:15px">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="txttimkiem" value="@ViewBag.TuKhoa" name="tukhoa" style="border-radius:unset" placeholder="Nhập từ khóa...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" style="border-radius:unset" id="btnsubmit" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        @Html.Action("TinMoiNhat", "Home", new List<Web_AMO_MVC.Models.BAIVIET>())
+                    </div>
+
+                    <ul class="ulmenu">
+                        <li class="limenu">
+                            <a class="amenu" style="background: #ff0000;" href="~/gioi-thieu">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-comment"></span> &nbsp; Giới thiệu</a>
+                        </li>
+                        <li class="limenu">
+                            <a class="amenu" href="~/can-bo-nhan-vien" style="background:#0094ff">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th"></span> &nbsp; Cán bộ - nhân viên</a>
+                        </li>
+                        <li class="limenu">
+                            <a class="amenu" href="~/cong-van-tai-lieu" style="background:#fa6800">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-folder-open"></span> &nbsp; Công văn - tài liệu</a>
+                        </li>
+                        <li class="limenu">
+                            <a class="amenu" href="~/lich-cong-tac" style="background:#008a00;">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> &nbsp; Lịch công tác</a>
+                        </li>
+                        <li class="limenu">
+                            <a class="amenu" href="~/tin-tuc-su-kien" style="background:#9a165a;">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-list-alt"></span> &nbsp; Tin tức - sự kiện</a>
+                        </li>
+                        <li class="limenu">
+                            <a class="amenu" href="~/hinh-anh" style="background:#03324d;">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-picture"></span> &nbsp; Thư viện hình ảnh</a>
+                        </li>
+                        <li class="limenu">
+                            <a class="amenu" href="~/video" style="background:#690707;">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-film"></span> &nbsp; Thư viện video</a>
+                        </li>
+                    </ul>
+
+                    <div class="form-group" style="margin-top:8%;">
+                        <div style="clear:both;font-size:15px; height:35px;line-height:35px; background:#1496C5; color:#fff; margin-bottom:8px;">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-menu-hamburger"></span><label> &nbsp;&nbsp;&nbsp;Liên kết</label></div>
+                        <ul>
+                            <li style="margin: 8px 0px 8px -25px;padding-right: -40px;"><a href="http://www.monre.gov.vn/" target="_blank">Bộ tài nguyên và môi trường</a></li>
+                            <li style="margin: 8px 0px 8px -25px;padding-right: -40px;"><a href="http://www.kttvqg.gov.vn/" target="_blank">Trung tâm khí tượng thủy văn Quốc Gia</a></li>
+                            <li style="margin: 8px 0px 8px -25px;padding-right: -40px;"><a href="http://www.nchmf.gov.vn/" target="_blank">Trung tâm dự báo khí tượng thủy văn Trung Ương</a></li>
+                            <li style="margin: 8px 0px 8px -25px;padding-right: -40px;"><a href="http://www.jma.go.jp/en/typh/" target="_blank">Trang dự báo của Cơ quan khí tượng Nhật Bản</a></li>
+                            <li style="margin: 8px 0px 8px -25px;padding-right: -40px;"><a href="http://www.hko.gov.hk/informtc/tcMain.htm" target="_blank">Trang dự báo của Cơ quan khí tượng Hồng Kông</a></li>
+                            <li style="margin: 8px 0px 8px -25px;padding-right: -40px;"><a href="http://www.nrlmry.navy.mil/tc_pages/tc_home.html" target="_blank">Trang dự báo của Hải quân Mỹ</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="form-group" style="margin-top:8%;">
+                        <div style="clear:both;font-size:15px; height:35px;line-height:35px; background:#1496C5; color:#fff; margin-bottom:8px;">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span><label> &nbsp;&nbsp;&nbsp;Thống kê truy cập</label></div>
+                        @Html.Partial("~/Views/Home/TruyCap.cshtml")
+                    </div>
+                </div>
+                <div class="col-md-1">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-1">
+
+                </div>
+                <div class='col-md-10' style="margin-bottom:-40px;">
+                    <hr>
+                    @Html.Partial("~/Views/Home/SlideBottom.cshtml")
+                </div>
+                <div class="col-md-1">
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="~/Scripts/jquery-3.1.0.js"></script>
+    <script src="~/Areas/Admin/Content/plugins/ckeditor/ckeditor.js"></script>
+    <script src="~/Areas/Admin/Content/plugins/ckfinder/ckfinder.js"></script>
+    <script src="~/Scripts/jquery.cookie.js"></script>
+    <script src="~/Areas/Admin/Content/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Content/js/bootstrap.js"></script>
+    <script src="~/Areas/Admin/Content/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js"></script>
+    <script src="~/Scripts/lendautrang.js"></script>
+    <script>
+        CKEDITOR.replace('editor');
+    </script>
+    <script>
+        $(function () {
+            $(".textarea").wysihtml5({
+                toolbar:
+                {
+                    "font-styles": false,
+                    "blockquote": false,
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        $("#btnsubmit").click(function () {
+            if ($("#txttimkiem").val() == "") {
+                alert("Nhập từ khóa cần tìm kiếm");
+                return false;
+            }
+        });
+    </script>
+    @*<script>
+            $(document).ready(function () {
+                //if cookie hasn't been set...
+                if (document.cookie.indexOf("ModalShown=true") < 0) {
+
+                    //Đợi 1s khi trang web chạy
+                    setTimeout(function () {
+                        $(document).ready(function () {
+                            $('#myModalTB').modal('show');
+                        });
+                    }, 1000);
+
+                    //đến giây thứ 10 thì tắt
+                    setTimeout(function () {
+                        $(document).ready(function () {
+                            $('#myModalTB').modal('hide');
+                        });
+                    }, 15000);
+
+                    //Xử lý cookies k lặp lại
+                    $("#myModalClose").click(function () {
+                        $("#myModalTB").modal("hide");
+                    });
+                    document.cookie = "ModalShown=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+                }
+            });
+        </script>*@
+
+    <script>
+            $(document).ready(function () {
+                    //Đợi 2s khi trang web chạy
+                    setTimeout(function () {
+                        $(document).ready(function () {
+                            $('#myModalTB').modal('show');
+                        });
+                    }, 2000);
+
+                    //đến giây thứ 10 thì tắt
+                    setTimeout(function () {
+                        $(document).ready(function () {
+                            $('#myModalTB').modal('hide');
+                        });
+                    }, 60000);
+            });
+        </script>
+
+
+    <div class="panel panel-default" style="margin-top:20px;margin-bottom:0px">
+        <div class="panel-footer" style="background:#e1e6e9">
+            <div class="container">
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5" style="line-height:2">
+                        Copyright&copy;2016 Đài Khí tượng Cao không<br />
+                        Trung tâm Khí tượng Thủy văn quốc gia<br />
+                        Địa chỉ: số 23/62 Nguyễn Chí Thanh - Láng Thượng - Đống Đa - Hà Nội<br />
+                        Email liên hệ: daiktck@amo.gov.vn<br />
+                        Điện thoại: 043.8343.588 - 043.2595.250, Fax: (84-4) 38358902<br />
+                        Chịu trách nhiệm:<br />
+                    </div>
+                    <div class="col-md-5" style="line-height:2">
+                        Designer by: <a href="https://www.facebook.com/vdh2912" target="_blank" style="color:#0760a3">Vũ Đức Hiến - CNTT</a><br />
+                        Lớp TK11.1 - Khoa Công Nghệ Thông Tin<br />
+                        Trường Đại Học Sư Phạm Kỹ Thuật Hưng Yên<br />
+                        Email liên hệ: vuhienit@gmail.com<br />
+                        Điện thoại: 0976.400.628 - 01674.671.428<br />
+                        Version demo: 1.0
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a id="back-to-top" href="#" class="btn btn-primary btn-group-sm back-to-top" role="button" title="Lên đầu trang" data-toggle="tooltip" data-placement="left">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <style>
+        .back-to-top {
+            cursor: pointer;
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            display: none;
+            border-radius: unset;
+        }
+    </style>
+</body>
+</html>
+<noembed>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5112a0a4e1994ef5b6b3bda19d1794e3" Name="Diagram1">
+        <EntityTypeShape EntityType="Web_KTCKModel.ALBUM" Width="1.5" PointX="3.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Web_KTCKModel.BAIVIET" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Web_KTCKModel.BINHLUAN" Width="1.5" PointX="8.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Web_KTCKModel.CANBO" Width="1.5" PointX="6" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Web_KTCKModel.HINHANH" Width="1.5" PointX="6" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Web_KTCKModel.LICHLAMVIEC" Width="1.5" PointX="3" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Web_KTCKModel.PHONGBAN" Width="1.5" PointX="3.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Web_KTCKModel.TAIKHOAN" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Web_KTCKModel.TAILIEU" Width="1.5" PointX="3" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Web_KTCKModel.THELOAIBAIVIET" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Web_KTCKModel.THONGBAO" Width="1.5" PointX="3" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Web_KTCKModel.VIDEO" Width="1.5" PointX="6" PointY="17.25" IsExpanded="true" />
+        <AssociationConnector Association="Web_KTCKModel.FK_HINHANH_ALBUM" ManuallyRouted="false" />
+        <AssociationConnector Association="Web_KTCKModel.FK_VIDEO_ALBUM" ManuallyRouted="false" />
+        <AssociationConnector Association="Web_KTCKModel.FK_BAIVIET_TAIKHOAN1" ManuallyRouted="false" />
+        <AssociationConnector Association="Web_KTCKModel.FK_BAIVIET_THELOAIBAIVIET" ManuallyRouted="false" />
+        <AssociationConnector Association="Web_KTCKModel.FK_BINHLUAN_BAIVIET" ManuallyRouted="false" />
+        <AssociationConnector Association="Web_KTCKModel.FK_BINHLUAN_TAIKHOAN" ManuallyRouted="false" />
+        <AssociationConnector Association="Web_KTCKModel.FK_CANBO_PHONGBAN" ManuallyRouted="false" />
+        <AssociationConnector Association="Web_KTCKModel.FK_CANBO_TAIKHOAN" ManuallyRouted="false" />
+        <AssociationConnector Association="Web_KTCKModel.FK_HINHANH_TAIKHOAN" ManuallyRouted="false" />
+        <AssociationConnector Association="Web_KTCKModel.FK_LICHLAMVIEC_TAIKHOAN" ManuallyRouted="false" />
+        <AssociationConnector Association="Web_KTCKModel.FK_TAILIEU_TAIKHOAN" ManuallyRouted="false" />
+        <AssociationConnector Association="Web_KTCKModel.FK_THONGBAO_TAIKHOAN1" ManuallyRouted="false" />
+        <AssociationConnector Association="Web_KTCKModel.FK_VIDEO_TAIKHOAN" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

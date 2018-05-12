@@ -1,0 +1,32 @@
+﻿@model  List<Web_AMO_MVC.Models.THONGBAO>
+<div class="modal fade" id="myModalTB" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thông Báo</h4>
+            </div>
+            <div class="modal-body">
+                @if (Model != null)
+                {
+                    foreach (var tb in Model)
+                    {
+                        <span style="color:#0026ff;font-size:19px;">@tb.TieuDe</span>
+                        <br />
+                        <span style="color:#999;" class="glyphicon glyphicon-time"></span> <span style="color:#999;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">@tb.NgayDang.Value.ToString("dd/MM/yyyy hh:mm:ss tt")</span>
+                        <br />
+                            <p style="text-align:justify">@tb.NoiDung</p>
+                            <hr />
+                    }
+                }
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+
+    </div>
+</div>

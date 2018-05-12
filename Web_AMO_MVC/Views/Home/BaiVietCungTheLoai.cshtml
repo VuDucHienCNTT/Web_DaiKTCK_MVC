@@ -1,0 +1,23 @@
+﻿@model List<Web_AMO_MVC.Models.BAIVIET>
+
+<div style="height:35px;line-height:35px;margin-bottom:2%; color:#fff;font-weight:bold;background:#1496C5;margin-top:3%">
+    &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tasks"></span><label>  &nbsp;&nbsp;&nbsp;Bài viết cùng chuyên mục </label>
+</div>
+
+@if (Model != null)
+{
+    if (Model.Count > 0)
+    {
+        foreach (var bvcungtheloai in Model)
+        {
+            <a href="/chi-tiet/tin-tuc-su-kien/@bvcungtheloai.IdBV/@Web_AMO_MVC.Models.ChuanHoaSEO.ConvertTitle(bvcungtheloai.TieuDe)"><span style="line-height:2.4;font-weight:bold;font-size:13px;">&#9679; @bvcungtheloai.TieuDe</span> (@bvcungtheloai.NgayDang.Value.ToString("dd/MM/yyyy hh:mm:ss tt"))</a> <br />
+        }
+        <br />
+        <br />
+    }
+    else
+    {
+        <span>Không có bài viết cùng chuyên mục...</span>
+    }
+}
+
